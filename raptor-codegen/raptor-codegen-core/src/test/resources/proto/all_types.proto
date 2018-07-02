@@ -1,0 +1,53 @@
+syntax = "proto3";
+
+package com.ppdai.framework.raptor.proto;
+option java_outer_classname = "AlltypesProtos";
+message AllTypesPojo {
+    enum NestedEnum {
+        A = 0;
+    }
+    message NestedMessage {
+        int32 a = 1;
+    }
+    int32 int32 = 1;
+    uint32 uint32 = 2;
+    sint32 sint32 = 3;
+    fixed32 fixed32 = 4;
+    sfixed32 sfixed32 = 5;
+    int64 int64 = 6;
+    uint64 uint64 = 7;
+    sint64 sint64 = 8;
+    fixed64 fixed64 = 9;
+    sfixed64 sfixed64 = 10;
+    bool bool = 11;
+    float float = 12;
+    double double = 13;
+    string string = 14;
+    bytes bytes = 15;
+    NestedEnum nested_enum = 16;
+    NestedMessage nested_message = 17;
+
+    repeated int32 rep_int32 = 201;
+    repeated uint32 rep_uint32 = 202;
+    repeated sint32 rep_sint32 = 203;
+    repeated fixed32 rep_fixed32 = 204;
+    repeated sfixed32 rep_sfixed32 = 205;
+    repeated int64 rep_int64 = 206;
+    repeated uint64 rep_uint64 = 207;
+    repeated sint64 rep_sint64 = 208;
+    repeated fixed64 rep_fixed64 = 209;
+    repeated sfixed64 rep_sfixed64 = 210;
+    repeated bool rep_bool = 211;
+    repeated float rep_float = 212;
+    repeated double rep_double = 213;
+    repeated string rep_string = 214;
+    repeated bytes rep_bytes = 215;
+    repeated NestedEnum rep_nested_enum = 216;
+    repeated NestedMessage rep_nested_message = 217;
+
+    map<int32, int32> map_int32_int32 = 501;
+    map<string, string> map_string_string = 502;
+    map<string, NestedMessage> map_string_message = 503;
+    map<string, NestedEnum> map_string_enum = 504;
+}
+

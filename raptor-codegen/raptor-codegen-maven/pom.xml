@@ -5,17 +5,17 @@
     <parent>
         <artifactId>raptor-codegen</artifactId>
         <groupId>com.ppdai.framework</groupId>
-        <version>0.1.0-SNAPSHOT</version>
+        <version>0.2.x-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
     <packaging>maven-plugin</packaging>
     <artifactId>raptor-codegen-maven</artifactId>
 
     <properties>
-        <protobuf-java.version>3.4.0</protobuf-java.version>
-        <maven-project.version>2.0.9</maven-project.version>
-        <plexus-build-api.version>0.0.7</plexus-build-api.version>
-        <plexus-utils.version>3.0</plexus-utils.version>
+        <!--<protobuf-java.version>3.4.0</protobuf-java.version>-->
+        <!--<maven-project.version>2.0.9</maven-project.version>-->
+        <!--<plexus-build-api.version>0.0.7</plexus-build-api.version>-->
+        <!--<plexus-utils.version>3.0</plexus-utils.version>-->
         <maven-plugin-api.version>2.0.9</maven-plugin-api.version>
         <maven-model.version>2.2.1</maven-model.version>
         <maven-plugin-annotations.version>3.2</maven-plugin-annotations.version>
@@ -23,27 +23,10 @@
 
     <dependencies>
         <dependency>
-            <groupId>com.ppdai.framework</groupId>
-            <artifactId>raptor-codegen-core</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.apache.maven</groupId>
-            <artifactId>maven-project</artifactId>
-            <version>${maven-project.version}</version>
-        </dependency>
-
-        <!--these two below need to be together-->
-        <dependency>
-            <groupId>org.sonatype.plexus</groupId>
-            <artifactId>plexus-build-api</artifactId>
-            <version>${plexus-build-api.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.codehaus.plexus</groupId>
-            <artifactId>plexus-utils</artifactId>
-            <version>${plexus-utils.version}</version>
+            <groupId>org.apache.maven.plugin-tools</groupId>
+            <artifactId>maven-plugin-annotations</artifactId>
+            <version>${maven-plugin-annotations.version}</version>
+            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>org.apache.maven</groupId>
@@ -56,39 +39,33 @@
             <version>${maven-model.version}</version>
         </dependency>
         <dependency>
-            <groupId>org.apache.maven.plugin-tools</groupId>
-            <artifactId>maven-plugin-annotations</artifactId>
-            <version>${maven-plugin-annotations.version}</version>
-            <scope>provided</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <scope>test</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>junit-addons</groupId>
-            <artifactId>junit-addons</artifactId>
-            <version>1.4</version>
-            <scope>test</scope>
-        </dependency>
-
-        <dependency>
             <groupId>org.apache.maven.plugin-testing</groupId>
             <artifactId>maven-plugin-testing-harness</artifactId>
             <version>1.2</version>
-            <scope>test</scope>
         </dependency>
-
         <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-log4j12</artifactId>
-            <version>1.7.9</version>
-            <scope>test</scope>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.ppdai.framework</groupId>
+            <artifactId>raptor-codegen-core</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.squareup.wire</groupId>
+            <artifactId>wire-runtime</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.squareup</groupId>
+            <artifactId>javapoet</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
         </dependency>
     </dependencies>
+
 
     <build>
         <plugins>
@@ -108,4 +85,6 @@
             </plugin>
         </plugins>
     </build>
+
+
 </project>

@@ -1,0 +1,11 @@
+syntax = "proto3";
+
+package com.ppdai.raptor.codegen.test;
+
+
+
+
+/* test message document */
+message Foo {
+    repeated string input = 1;
+}

@@ -4,4 +4,4 @@ jdk:
 
 
 after_success:
-  - mvn clean test jacoco:report coveralls:report -DrepoToken="${COVERALLS_TOKEN}"
+  - mvn clean install jacoco:report coveralls:report -DrepoToken="${COVERALLS_TOKEN}"

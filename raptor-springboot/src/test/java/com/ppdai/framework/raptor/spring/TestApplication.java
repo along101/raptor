@@ -1,29 +1,18 @@
 package com.ppdai.framework.raptor.spring;
 
-import org.springframework.beans.BeansException;
+import com.ppdai.framework.raptor.spring.service.SimpleImpl;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.ApplicationContextAware;
-import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.context.annotation.ComponentScan;
 
+/**
+ * @author yinzuolong
+ */
 @SpringBootApplication
-public class TestApplication implements ApplicationContextAware {
-
-    private static ConfigurableApplicationContext context;
+@ComponentScan(basePackageClasses = {SimpleImpl.class})
+public class TestApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(TestApplication.class, args);
-    }
-
-    public static void close() {
-        if (context != null) {
-            context.close();
-        }
-    }
-
-    @Override
-    public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
-        context = (ConfigurableApplicationContext) applicationContext;
     }
 }

@@ -1,0 +1,115 @@
+syntax = "proto3";
+
+package com.ppdai.framework.raptor.proto;
+
+import "com/ppdai/framework/raptor/proto/Result.proto";
+import "raptor.proto";
+
+option (appId) = "123456";
+option (appName) = "demo";
+option (version) = "version.0.1";
+
+service Simple {
+    rpc sayHello (HelloRequest) returns (HelloReply) {
+    }
+}
+
+service MoreService {
+    option (servicePath) = "/more";
+    rpc testGet1 (HelloRequest) returns (HelloReply) {
+        option (method) = "get";
+    }
+    rpc testGet2 (HelloRequest) returns (HelloReply) {
+        option (method) = "get";
+        option (path) = "/get2";
+    }
+    rpc testPost1 (HelloRequest) returns (HelloReply) {
+        option (method) = "post";
+        option (path) = "/post1";
+    }
+    rpc testPut1 (HelloRequest) returns (HelloReply) {
+        option (method) = "put";
+        option (path) = "/put1";
+    }
+    rpc testDelete1 (HelloRequest) returns (HelloReply) {
+        option (method) = "delete";
+        option (path) = "/delete";
+    }
+}
+message HelloRequest {
+    string name = 1;
+    enum Corpus {
+        UNIVERSAL = 0;
+        WEB = 1;
+        IMAGES = 2;
+        LOCAL = 3;
+        NEWS = 4;
+        PRODUCTS = 5;
+        VIDEO = 6;
+    }
+    Corpus corpus = 2;
+    repeated string snippets = 3;
+    repeated Cat cats = 4;
+    message Result {
+        enum Corpus {
+            UNIVERSAL = 0;
+            WEB = 1;
+            IMAGES = 2;
+            LOCAL = 3;
+            NEWS = 4;
+            PRODUCTS = 5;
+            VIDEO = 6;
+        }
+        string url = 1;
+        Corpus corpus = 2;
+    }
+    Result result = 5;
+    double tDouble = 6;
+    float tFloat = 7;
+    int32 tint32 = 8;
+    int64 tint64 = 9;
+    uint32 tunit32 = 10;
+    uint64 tunit64 = 11;
+    sint32 tsint32 = 12;
+    sint64 tsint64 = 13;
+    fixed32 tfixed32 = 14;
+    fixed64 tfixed64 = 15;
+    sfixed32 tsfixed32 = 16;
+    sfixed64 tsfixed64 = 17;
+    bytes tbytes = 18;
+    bool tbool = 19;
+
+
+    repeated int32 rep_int32 = 201;
+    repeated uint32 rep_uint32 = 202;
+    repeated sint32 rep_sint32 = 203;
+    repeated fixed32 rep_fixed32 = 204;
+    repeated sfixed32 rep_sfixed32 = 205;
+    repeated int64 rep_int64 = 206;
+    repeated uint64 rep_uint64 = 207;
+    repeated sint64 rep_sint64 = 208;
+    repeated fixed64 rep_fixed64 = 209;
+    repeated sfixed64 rep_sfixed64 = 210;
+    repeated bool rep_bool = 211;
+    repeated float rep_float = 212;
+    repeated double rep_double = 213;
+    repeated string rep_string = 214;
+    repeated bytes rep_bytes = 215;
+    repeated Result rep_Result = 216;
+
+    map<int32, int32> map_int32_int32 = 501;
+    map<string, string> map_string_string = 502;
+    map<string, Result> map_string_message = 503;
+    map<string, Corpus> map_string_enum = 504;
+}
+
+message HelloReply {
+    string message = 1;
+    int32 code = 2;
+    HelloRequest request = 3;
+    map<string, string> result = 4;
+}
+
+message Cat {
+    string color = 1;
+}

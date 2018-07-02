@@ -1,0 +1,24 @@
+syntax = "proto3";
+import "google/protobuf/descriptor.proto";
+
+option java_package = "com.ppdai.framework.raptor";
+
+extend google.protobuf.FileOptions {
+    string appId = 60001;
+    string appName = 60002;
+    string version = 60003;
+    string summary = 60004;
+}
+extend google.protobuf.ServiceOptions {
+    string servicePath = 61001;
+}
+extend google.protobuf.MethodOptions {
+    string method = 62001;
+    string path = 62002;
+    repeated string pathParam= 62003;
+    repeated string requestParam = 62004;
+    repeated string headerParam = 62005;
+}
+
+
+

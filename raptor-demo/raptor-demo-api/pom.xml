@@ -5,7 +5,7 @@
     <parent>
         <artifactId>raptor-demo</artifactId>
         <groupId>com.ppdai.framework</groupId>
-        <version>0.1.0-SNAPSHOT</version>
+        <version>0.2.x-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
@@ -13,31 +13,27 @@
 
     <dependencies>
         <dependency>
-            <groupId>com.google.protobuf</groupId>
-            <artifactId>protobuf-java</artifactId>
-        </dependency>
-        <dependency>
             <groupId>com.ppdai.framework</groupId>
-            <artifactId>raptor-core</artifactId>
+            <artifactId>raptor-springboot</artifactId>
             <version>${project.version}</version>
         </dependency>
     </dependencies>
 
     <build>
+        <resources>
+            <resource>
+                <directory>src/main/proto</directory>
+            </resource>
+        </resources>
         <plugins>
             <plugin>
                 <groupId>com.ppdai.framework</groupId>
                 <artifactId>raptor-codegen-maven</artifactId>
                 <version>${project.version}</version>
-                <configuration>
-                    <includeStdTypes>true</includeStdTypes>
-                    <releaseUrl>http://maven.repo.ppdai.com/nexus/content/groups/public/</releaseUrl>
-                </configuration>
                 <executions>
                     <execution>
                         <goals>
                             <goal>proto2java</goal>
-                            <goal>proto2swagger</goal>
                         </goals>
                     </execution>
                 </executions>

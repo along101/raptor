@@ -28,7 +28,7 @@ public class RaptorInfo {
 
     private String appId;
     private String version;
-    private String metricPrefix = RaptorConstants.METRIC_NAME;
+    private String metricPrefix = RaptorConstants.RAPTOR;
 
     private RaptorInfo() {
         try (InputStream in = this.getClass().getClassLoader().getResourceAsStream(INFO_FILE)) {

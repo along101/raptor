@@ -1,0 +1,88 @@
+syntax = "proto3";
+
+package com.ppdai.raptor.codegen.test;
+
+
+import "raptor.proto";
+import "com/ppdai/raptor/codegen/test/A.proto";
+
+option (appId) = "appId";
+option (appName) = "app name";
+option (version) = "version.0.1";
+
+
+service TestService{
+
+    option (servicePath) = "/servicePath";
+
+    /* asdfghhjk */
+    rpc getRandomString (Foo) returns (RandomStringResponse) {
+        option (method) = "get";
+        option (path) = "/test";
+    }
+    rpc SlowResponder (GetRandomStringQuery) returns (RandomStringResponse) {
+        option (method) = "get";
+        option (path) = "/test/{id}/{name}";
+        option (pathParamTypes) = "int,string";
+    }
+    rpc SetHealthCheckStatus (SetHealthCheckStatusCommand) returns (SetHealthCheckStatusResponse) {
+        option (path) = "/test/{name}/{gender}";
+    }
+    rpc CallsAnotherService (CallAnotherServiceCommand) returns (CallAnotherServiceResponse) {}
+}
+
+/* test message document */
+message GetRandomStringQuery {
+    repeated string input = 1;
+    map<int32,int32> amap = 2;
+
+    oneof oneof_test {
+        int32 id = 3;
+        string name = 4;
+    }
+
+    RandomStringResponse r = 5;
+    TestEnum te = 6;
+
+}
+
+enum TestEnum{
+    A = 0;
+    B = 1;
+}
+
+message RandomStringResponse {
+    string random = 1;
+}
+
+message SetHealthCheckStatusCommand {
+    string status = 1;
+    string message = 2;
+}
+
+message SetHealthCheckStatusResponse {
+}
+
+message RandomSampleEvent {
+    Meta meta = 1;
+    string id = 2;
+    string message = 3;
+}
+
+message HandlerSuccessEvent {
+    Meta meta = 1;
+    string id = 2;
+    string message = 3;
+}
+
+message Meta {
+    string name = 1;
+    bytes bytes = 2;
+    repeated bytes byteList = 3;
+}
+
+message CallAnotherServiceCommand {
+}
+
+message CallAnotherServiceResponse {
+}

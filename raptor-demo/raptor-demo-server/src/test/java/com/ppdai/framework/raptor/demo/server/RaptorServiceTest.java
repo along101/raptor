@@ -1,38 +1,46 @@
 package com.ppdai.framework.raptor.demo.server;
 
-import org.apache.commons.lang3.StringUtils;
-import org.apache.http.HttpEntity;
-import org.apache.http.client.entity.EntityBuilder;
-import org.apache.http.client.methods.CloseableHttpResponse;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.entity.ContentType;
-import org.apache.http.impl.client.CloseableHttpClient;
-import org.apache.http.impl.client.HttpClients;
-import org.apache.http.util.EntityUtils;
+import com.ppdai.framework.raptor.proto.HelloReply;
+import com.ppdai.framework.raptor.proto.HelloRequest;
+import org.junit.AfterClass;
 import org.junit.Assert;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.web.ServerProperties;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.util.SocketUtils;
+import org.springframework.web.client.RestTemplate;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = SpringBootServer.class, webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
 public class RaptorServiceTest {
 
+    @Autowired
+    private ServerProperties serverProperties;
+
+    private RestTemplate restTemplate = new RestTemplate();
+
+    @BeforeClass
+    public static void beforeClass() {
+        System.setProperty("server.port", String.valueOf(SocketUtils.findAvailableTcpPort()));
+    }
+
+    @AfterClass
+    public static void afterClass() {
+        System.clearProperty("server.port");
+    }
+
     @Test
     public void testServer() throws Exception {
-
-        CloseableHttpClient httpclient = HttpClients.createDefault();
-        HttpPost post = new HttpPost("http://localhost:8080/raptor/com.ppdai.framework.raptor.proto.Simple/sayHello");
-        String req = "{\"name\":\"ppdai\"}";
-        HttpEntity entity = EntityBuilder.create().setContentType(ContentType.APPLICATION_JSON).setText(req).build();
-        post.setEntity(entity);
-        CloseableHttpResponse response = httpclient.execute(post);
-
-        String reply = EntityUtils.toString(response.getEntity());
-
-        System.out.println(reply);
-        Assert.assertTrue(StringUtils.contains(reply, "Hello ppdai"));
+        String url = "http://localhost:" + serverProperties.getPort() + "/raptor/com.ppdai.framework.raptor.proto.Simple/sayHello";
+        HelloRequest request = new HelloRequest();
+        request.setName("ppdai");
+        HelloReply reply = restTemplate.postForObject(url, request, HelloReply.class);
+        System.out.println(reply.getRequest().getName());
+        Assert.assertTrue(reply.getMessage().contains("Hello ppdai"));
     }
 
 }

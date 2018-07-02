@@ -1,0 +1,56 @@
+
+    @RequestMapping(
+            path = "/post2/{tDouble}/{tDouble}",
+            method = RequestMethod.POST
+    )
+    @RaptorMethod
+    HelloReply testPost2(
+            @PathVariable("tFloat") String tFloat,
+            @PathVariable("tDouble") String tDouble,
+            @RequestParam("tunit64") String tunit64,
+            @HeaderParam("tfixed64") String tfixed64,
+            Map<String,String> mapStringString,
+            @RequestBody HelloRequest result);
+
+
+
+service MoreService {
+    option (servicePath) = "/more";
+    rpc testGet1 (HelloRequest) returns (HelloReply) {
+        option (method) = "get";
+        option (path) = "/get1";
+        option (requestParam) = "p1";
+        option (headerParam) = "x_h1";
+        option (queryParamAll) = "true";
+        option (queryParamMap) = "map_string_string";
+    }
+    rpc testGet2 (HelloRequest) returns (HelloReply) {
+        option (method) = "get";
+        option (path) = "/get2/{p1}";
+        option (pathParam) = "p1=string";
+    }
+    rpc testPost1 (HelloRequest) returns (HelloReply) {
+        option (method) = "post";
+        option (path) = "/post1";
+        option (requestParam) = "p1=string";
+    }
+    rpc testPost2 (HelloRequest) returns (HelloReply) {
+        option (method) = "post";
+        option (path) = "/post2/{tFloat}/{tDouble}";
+        option (requestParam) = "tunit64";
+        option (headerParam) = "tfixed64";
+        option (queryMap) = "map_string_string";
+        option (body) = "result";
+
+    }
+    rpc testPut1 (HelloRequest) returns (HelloReply) {
+        option (method) = "put";
+        option (path) = "/put1";
+        option (requestParam) = "p1=string";
+    }
+    rpc testDelete1 (HelloRequest) returns (HelloReply) {
+        option (method) = "delete";
+        option (path) = "/delete/{p2}";
+        option (pathParam) = "p2=int";
+    }
+}
